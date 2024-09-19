@@ -31,4 +31,4 @@ test:
   artifacts:
     when: always
     paths:
-      - allure-reportg
+      - allure-report
