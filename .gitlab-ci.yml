@@ -16,25 +16,18 @@ default:
     - eng-platform-runner
 
 test:
+  before_script:
+    - apt-get update -qq && apt-get install -qqy default-jre
+    - npm install axios
+    - npm install @types/axios
+    - npm ci
   script:
-    - echo "test"
-
-# test:
-#   before_script:
-#     - apt-get update -qq && apt-get install -qqy default-jre python3-pip
-#     - pip install trcli
-#     - npm install axios
-#     - npm install @types/axios
-#     - npm ci
-#   script:
-#     - npm run test
-#   after_script:
-#     - npm run tr-report
-#     - npx allure generate --clean allure-results
-#     - npx cypress-msteams-allure-2 --report-url "https://insightpartners.gitlab.io/-/ignite-platform/ignite-platform-be-automation/-/jobs/$CI_JOB_ID/artifacts/allure-report/index.html"
-#   allow_failure: true
-#   artifacts:
-#     when: always
-#     paths:
-#       - allure-report
-#       - test-results/*/trace.zip
+    - npm run test
+  after_script:
+    - npx allure generate --clean allure-results
+    - npx cypress-msteams-allure-2 --report-url "https://insightpartners.gitlab.io/-/ignite-platform/ignite-platform-fe-automation/-/jobs/$CI_JOB_ID/artifacts/allure-report/index.html"
+  allow_failure: true
+  artifacts:
+    when: always
+    paths:
+      - allure-reportg
