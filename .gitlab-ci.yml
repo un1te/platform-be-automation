@@ -11,12 +11,13 @@ stages:
   - test
 
 default:
-  image: mcr.microsoft.com/playwright:v1.44.1-jammy
+  image: mcr.microsoft.com/playwright:v1.46.1-jammy
   tags:
     - eng-platform-runner
 
 test:
   before_script:
+    - npm install
     - apt-get update -qq && apt-get install -qqy default-jre
     - npm install axios
     - npm install @types/axios
