@@ -26,7 +26,7 @@ test:
     - npm run test
   after_script:
     - npx allure generate --clean allure-results
-    - npx cypress-msteams-allure-2 --report-url "https://insightpartners.gitlab.io/-/ignite-platform/ignite-platform-fe-automation/-/jobs/$CI_JOB_ID/artifacts/allure-report/index.html"
+    - npx cypress-msteams-allure-2 --report-url "https://insightpartners.gitlab.io/-/ignite-platform/ignite-platform-be-automation/-/jobs/$CI_JOB_ID/artifacts/allure-report/index.html"
   allow_failure: true
   artifacts:
     when: always
