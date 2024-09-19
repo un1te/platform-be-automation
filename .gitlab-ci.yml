@@ -11,7 +11,7 @@ stages:
   - test
 
 default:
-  image: mcr.microsoft.com/playwright:v1.46.1-jammy
+  image: mcr.microsoft.com/playwright:v1.47.1-jammy
   tags:
     - eng-platform-runner
 
