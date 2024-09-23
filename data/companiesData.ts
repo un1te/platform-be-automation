@@ -11,3 +11,11 @@ const statuses = {
     "started": "started",
     "finished": "finished"
 }
+
+export default {
+    categoryId,
+    subcategoryId,
+    topPriorityId,
+    sort,
+    statuses
+}

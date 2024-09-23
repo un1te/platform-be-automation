@@ -18,7 +18,8 @@ export interface Response {
      fundingStage:  string,
      customers: string[],
      companyExecutiveInsight1:  string,
-     companyExecutiveInsight2: string
+     companyExecutiveInsight2: string,
+     companyMarketGap: string
 }
 
 export interface CompanyParams {

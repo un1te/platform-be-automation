@@ -12,4 +12,10 @@ export default class CompaniesApi {
         const response = await axiosInstance.get(`/companies?${filteredParams}`);
         return response.data;
     }
+
+    public async getFeaturedCompanies(meetingId: number ): Promise<Response> {
+        const axiosInstance = await getAxiosInstance();
+        const response = await axiosInstance.get('/companies/featured?meetingId='+ meetingId);
+        return response.data;
+    }
 }

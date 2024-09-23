@@ -1,5 +1,7 @@
 import globalData from './globalData'
 
+const employeeName = 'Testing'
+
 function getRandomTestName(): string {
     const name = "test";
     const randomNumbers = Math.floor(1000 + Math.random() * 9000).toString();
@@ -19,6 +21,17 @@ const createMeetingPayload = {
     "industryName": getRandomTestName(),
 };
 
+const createMeetingFeaturedCompaniesPayload = {
+    "employeeName": getRandomTestName(),
+    "employeeRole": getRandomTestName(),
+    "roleId": globalData.roleIdCISO,
+    "companyName": getRandomTestName(),
+    "industryName": getRandomTestName(),
+    "companyIds": [
+        globalData.companyId
+    ]
+};
+
 const startMeetingPayload = {
     "status": statuses.started
 };
@@ -31,5 +44,7 @@ export default {
     createMeetingPayload,
     statuses,
     startMeetingPayload,
-    finishMeetingPayload
+    createMeetingFeaturedCompaniesPayload,
+    finishMeetingPayload,
+    employeeName,
 }
