@@ -1,10 +1,11 @@
-import {getAxiosInstance} from "../helpers/utils/axiosInstance";
+import { getAxiosInstance } from "../helpers/utils/axiosInstance";
 import {
     activeMeetingResponse,
     changeMeetingStatusPayload,
     employeesResponse,
     MeetingCreatePayload,
-    meetingResponse, responseData
+    meetingResponse,
+    responseData
 } from "./Interfaces/meeting";
 import axios from "axios";
 
@@ -20,10 +21,11 @@ export default class meetingApi {
             return await axiosInstance.delete('/meetings/' + id);
 
         } catch (error) {
-
             if (axios.isAxiosError(error) && error.response) {
+                console.warn(`Delete meeting failed with status ${error.response.status}`);
                 return error.response.status;
             }
+            this.handleError(`Failed to delete meeting with ID ${id}`, error);
             throw error;
         }
     }
@@ -52,6 +54,11 @@ export default class meetingApi {
         return response.data;
     }
 
+    /**
+     * Checks for active meetings in settings
+     * @returns Active meeting response
+     * @throws Error if API request fails
+     */
     public async checkActiveMeeting(): Promise<activeMeetingResponse> {
         const axiosInstance = await getAxiosInstance();
         const response = await axiosInstance.get('/settings');

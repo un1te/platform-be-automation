@@ -1,7 +1,7 @@
 {
-  "name": "e2e_test",
+  "name": "api-automation-framework",
   "version": "1.0.0",
-  "description": "",
+  "description": "Comprehensive API test automation framework using Playwright and TypeScript",
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",

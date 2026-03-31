@@ -1,13 +1,13 @@
-import {STORAGE_STATE_USER} from "../playwright.config";
-import {test} from '../fixtures/base';
+import { test } from '../fixtures/base';
 import meetingData from "../data/meetingData";
-import {expect} from "@playwright/test";
+import { expect } from "@playwright/test";
 import globalData from "../data/globalData";
-import {activeMeetingResponse} from "API/Interfaces/meeting";
-import {validateMeetingResponseSchema} from "../helpers/helper";
+import { activeMeetingResponse } from "API/Interfaces/meeting";
+import { validateMeetingResponseSchema } from "../helpers/helper";
 
 test.describe('Meetings API', () => {
-    test.use({storageState: STORAGE_STATE_USER});
+    // Optional: Uncomment and configure storageState if using authenticated storage
+    // test.use({storageState: STORAGE_STATE_USER});
 
     test.afterEach(async ({meetingApi}) => {
         await meetingApi.deleteAllMeetings();

@@ -1,56 +1,235 @@
-# Ignite Platform API Automation Tests
-This project contains automated tests for the Ignite Platform App using Node.js, Typescript and Playwright.
+# API Test Automation Framework
 
-## Prerequisites
-- Node.js latest LTS version installed
-- AWS VPN configured. (documentation: https://insightpartners.atlassian.net/wiki/spaces/IDS/pages/2878144540/How+to+access+the+AWS+VPN)
+A comprehensive test automation framework for API testing using **Playwright**, **TypeScript**, and **Axios**. This project demonstrates best practices in test automation including POM (Page Object Model), API abstraction layers, and Allure reporting.
 
-## Setup
+## 🎯 Features
 
-To set up the project and run tests locally, follow these steps:
+- ✅ API testing with custom Axios instances
+- ✅ TypeScript for type-safe tests
+- ✅ Playwright for end-to-end scenarios
+- ✅ Page Object Model (POM) pattern
+- ✅ Comprehensive test reporting with Allure
+- ✅ Configurable environment setup
+- ✅ Custom test fixtures for easy test writing
+- ✅ Error handling and validation
+- ✅ CI/CD ready
 
-1. Clone the repository to your local machine.
-2. Navigate to the `tests` directory.
-3. Install dependencies by running: 
+## 📋 Prerequisites
+
+- **Node.js** v18.0.0 or higher (LTS version recommended)
+- **npm** v9.0.0 or higher
+- Basic understanding of TypeScript and testing concepts
+
+## 🚀 Quick Start
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd api-automation-framework
+```
+
+### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
-4. Install Playwright by running:
+### 3. Install Playwright Browsers
+
 ```bash
 npx playwright install
 ```
 
-5. Create a `.env` file in the root directory with the following content:
+### 4. Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
 ```bash
-BASE_URL = https://ignite-platform-automation.nonprod.rad.insightpartners.com/
-API_URL = https://ignite-platform-backend-automation.nonprod.rad.insightpartners.com/api/v1
-USERNAME = <your user name>
-PASSWORD = <your password>
-PROXY = "socks5://127.0.0.1:9999"
+# API Configuration
+BASE_URL=https://api.example.com/
+API_URL=https://api.example.com/api/v1
+
+# Authentication
+USERNAME=your_username
+PASSWORD=your_password
+
+# Proxy (optional)
+PROXY=socks5://127.0.0.1:9999
 ```
 
-6. To run the tests locally, execute the following command:
-   (run proxy server to run tests locally)
+For development, you can use `.env.example` as a template.
+
+### 5. Run Tests
+
 ```bash
+# Run all tests
 npm run test
+
+# Run with debugging
+npm run test:debug
+
+# Run specific test file
+npm run test -- tests/examples/companies.spec.ts
 ```
 
-7. To run specific scenarios, use the `TAGS` parameter as follows:
-```bash
-npm run test <e2e_tests/tests/<test_name>.spec.ts>
-```
+### 6. Generate Test Report
 
-8. To generate the test report (under test-results/reports folder), execute the following command:
 ```bash
 npm run report-publish
 ```
 
-## Directory Structure
-- `pages`: contains pages in POM
-- `test-results`: Contains test result files (after tests execution completes).
-- `API`: Contains api services
-- `tests`: Contains test scenarios 
+This generates an Allure report in the `allure-report` directory.
 
-## Contributing
-Feel free to contribute to this project by opening issues or pull requests. Contributions are welcome!
+## 📁 Project Structure
+
+```
+├── API/                          # API Service Layer
+│   ├── CompaniesApi.ts          # Companies API endpoints
+│   ├── MeetingApi.ts            # Meeting API endpoints
+│   └── Interfaces/              # TypeScript interfaces for API responses
+├── pages/                        # Page Object Model (POM)
+│   ├── HomePage.ts              # Home page objects and actions
+│   └── OktaPage.ts              # Generic login/authentication page objects
+├── helpers/                      # Utility functions
+│   ├── helper.ts                # Common helpers and validators
+│   └── utils/
+│       ├── axiosInstance.ts     # Axios instance configuration
+│       └── globalSetup.js       # Global test setup
+├── fixtures/                    # Playwright fixtures
+│   └── base.ts                  # Custom test fixtures
+├── tests/                       # Test scenarios
+│   ├── companies.spec.ts        # Company API tests
+│   └── meetings.spec.ts         # Meeting API tests
+├── data/                        # Test data and fixtures
+├── test-results/                # Test execution results
+├── allure-results/              # Allure report data
+├── playwright.config.ts         # Playwright configuration
+├── tsconfig.json                # TypeScript configuration
+├── package.json                 # Project dependencies
+└── README.md                    # This file
+```
+
+## 🧪 Test Architecture
+
+### API Testing Pattern
+
+```typescript
+// Example: Using custom fixtures to test APIs
+test('Create new item', async ({itemApi}) => {
+  const response = await itemApi.create({
+    name: 'Test Item',
+    description: 'Test Description'
+  });
+  
+  expect(response.status).toBe(200);
+  expect(response.data.id).toBeDefined();
+});
+```
+
+### POM Pattern
+
+```typescript
+// Example: Using Page Objects for UI testing
+test('Login flow', async ({page, loginPage}) => {
+  await loginPage.navigate();
+  await loginPage.fillCredentials(username, password);
+  await loginPage.submit();
+  await expect(page).toHaveURL('/dashboard');
+});
+```
+
+## 📊 Available Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm run test` | Run all tests |
+| `npm run test:debug` | Run tests with debug mode enabled |
+| `npm run report-publish` | Generate Allure test report |
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file (see `.env.example`):
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `BASE_URL` | Base URL for the application | `https://api.example.com/` |
+| `API_URL` | API base URL | `https://api.example.com/api/v1` |
+| `USERNAME` | Test user username | `testuser` |
+| `PASSWORD` | Test user password | `password` |
+| `PROXY` | Proxy server URL (optional) | `socks5://127.0.0.1:9999` |
+
+## 📝 Writing Tests
+
+### Create a New Test
+
+```typescript
+import { test } from '../fixtures/base';
+import { expect } from '@playwright/test';
+
+test.describe('Feature Tests', () => {
+  test('Test case description', async ({meetingApi}) => {
+    // Setup
+    const payload = { /* test data */ };
+    
+    // Execute
+    const response = await meetingApi.createNewMeeting(payload);
+    
+    // Assert
+    await test.step("Verify response", async () => {
+      expect(response.status).toBe(200);
+      expect(response.data).toHaveProperty('id');
+    });
+  });
+});
+```
+
+### Using Test Steps
+
+Tests use Playwright's test steps for better organization and reporting:
+
+```typescript
+await test.step("Step name", async () => {
+  // Your assertions here
+});
+```
+
+## 🔐 Security
+
+- ⚠️ **Never commit `.env` file** - Add it to `.gitignore`
+- Use `.env.example` as a template
+- Store credentials securely in CI/CD systems
+- Use environment variables in GitHub Actions/GitLab CI
+
+## 📈 Test Results & Reporting
+
+Test results are automatically generated after each test run:
+
+- **Test Results**: `test-results/` directory
+- **Allure Reports**: `allure-results/` directory
+- **HTML Report**: Generated in `allure-report/`
+
+To view the Allure report:
+```bash
+npm run report-publish
+```
+
+
+
+### Authentication issues
+- Check `.env` file configuration
+- Verify credentials
+- Ensure API endpoints are accessible
+
+### Report generation fails
+- Ensure `allure-results` directory exists
+- Check Allure CLI is installed: `npx allure --version`
+
+## 📚 Resources
+
+- [Playwright Documentation](https://playwright.dev)
+- [TypeScript Documentation](https://www.typescriptlang.org)
+- [Axios Documentation](https://axios-http.com)
+- [Allure Framework](https://docs.qameta.io/allure)
