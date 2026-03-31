@@ -64,4 +64,13 @@ export default class meetingApi {
         const response = await axiosInstance.get('/settings');
         return response.data
     }
+
+    /**
+     * Handles API errors with consistent logging
+     * @param message Error message
+     * @param error The error object
+     */
+    private handleError(message: string, error: unknown): void {
+        console.error(`[API Error] ${message}`, error);
+    }
 }
