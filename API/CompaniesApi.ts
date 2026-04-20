@@ -3,10 +3,6 @@ import { Response, CompanyParams } from "./Interfaces/companies";
 import axios, { AxiosError } from "axios";
 import { API_ENDPOINTS, VALIDATION_RULES, ERROR_MESSAGES } from '../helpers/constants';
 
-/**
- * CompaniesApi class handles all company-related API operations
- * Provides methods for retrieving companies and featured companies
- */
 export default class CompaniesApi {
 
     /**

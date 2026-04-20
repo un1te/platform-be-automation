@@ -2,25 +2,25 @@
 
 A comprehensive test automation framework for API testing using **Playwright**, **TypeScript**, and **Axios**. This project demonstrates best practices in test automation including POM (Page Object Model), API abstraction layers, and Allure reporting.
 
-## 🎯 Features
+## Features
 
-- ✅ API testing with custom Axios instances
-- ✅ TypeScript for type-safe tests
-- ✅ Playwright for end-to-end scenarios
-- ✅ Page Object Model (POM) pattern
-- ✅ Comprehensive test reporting with Allure
-- ✅ Configurable environment setup
-- ✅ Custom test fixtures for easy test writing
-- ✅ Error handling and validation
-- ✅ CI/CD ready
+- API testing with custom Axios instances
+- TypeScript for type-safe tests
+- Playwright for end-to-end scenarios
+- Page Object Model (POM) pattern
+- Comprehensive test reporting with Allure
+- Configurable environment setup
+- Custom test fixtures for easy test writing
+- Error handling and validation
+- CI/CD ready
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Node.js** v18.0.0 or higher (LTS version recommended)
 - **npm** v9.0.0 or higher
 - Basic understanding of TypeScript and testing concepts
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone the Repository
 
@@ -81,7 +81,7 @@ npm run report-publish
 
 This generates an Allure report in the `allure-report` directory.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── API/                          # API Service Layer
@@ -110,36 +110,7 @@ This generates an Allure report in the `allure-report` directory.
 └── README.md                    # This file
 ```
 
-## 🧪 Test Architecture
-
-### API Testing Pattern
-
-```typescript
-// Example: Using custom fixtures to test APIs
-test('Create new item', async ({itemApi}) => {
-  const response = await itemApi.create({
-    name: 'Test Item',
-    description: 'Test Description'
-  });
-  
-  expect(response.status).toBe(200);
-  expect(response.data.id).toBeDefined();
-});
-```
-
-### POM Pattern
-
-```typescript
-// Example: Using Page Objects for UI testing
-test('Login flow', async ({page, loginPage}) => {
-  await loginPage.navigate();
-  await loginPage.fillCredentials(username, password);
-  await loginPage.submit();
-  await expect(page).toHaveURL('/dashboard');
-});
-```
-
-## 📊 Available Commands
+## Available Commands
 
 | Command | Description |
 |---------|-------------|
@@ -147,7 +118,7 @@ test('Login flow', async ({page, loginPage}) => {
 | `npm run test:debug` | Run tests with debug mode enabled |
 | `npm run report-publish` | Generate Allure test report |
 
-## 🔧 Configuration
+##  Configuration
 
 ### Environment Variables
 
@@ -161,7 +132,7 @@ Create a `.env` file (see `.env.example`):
 | `PASSWORD` | Test user password | `password` |
 | `PROXY` | Proxy server URL (optional) | `socks5://127.0.0.1:9999` |
 
-## 📝 Writing Tests
+## Writing Tests
 
 ### Create a New Test
 
@@ -196,14 +167,8 @@ await test.step("Step name", async () => {
 });
 ```
 
-## 🔐 Security
 
-- ⚠️ **Never commit `.env` file** - Add it to `.gitignore`
-- Use `.env.example` as a template
-- Store credentials securely in CI/CD systems
-- Use environment variables in GitHub Actions/GitLab CI
-
-## 📈 Test Results & Reporting
+##  Test Results & Reporting
 
 Test results are automatically generated after each test run:
 
@@ -216,20 +181,7 @@ To view the Allure report:
 npm run report-publish
 ```
 
-
-
 ### Authentication issues
 - Check `.env` file configuration
 - Verify credentials
 - Ensure API endpoints are accessible
-
-### Report generation fails
-- Ensure `allure-results` directory exists
-- Check Allure CLI is installed: `npx allure --version`
-
-## 📚 Resources
-
-- [Playwright Documentation](https://playwright.dev)
-- [TypeScript Documentation](https://www.typescriptlang.org)
-- [Axios Documentation](https://axios-http.com)
-- [Allure Framework](https://docs.qameta.io/allure)

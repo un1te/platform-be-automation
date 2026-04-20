@@ -1,4 +1,3 @@
-//globalSetup.js
 const dotenv = require('dotenv');
 
 async function globalSetup() {

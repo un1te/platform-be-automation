@@ -6,9 +6,6 @@ import { activeMeetingResponse } from "API/Interfaces/meeting";
 import { validateMeetingResponseSchema } from "../helpers/helper";
 
 test.describe('Meetings API', () => {
-    // Optional: Uncomment and configure storageState if using authenticated storage
-    // test.use({storageState: STORAGE_STATE_USER});
-
     test.afterEach(async ({meetingApi}) => {
         await meetingApi.deleteAllMeetings();
     });

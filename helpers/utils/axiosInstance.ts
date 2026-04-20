@@ -25,8 +25,7 @@ function getCookie(key: string) {
 }
 
 export async function getToken() {
-    // Example implementation for token retrieval
-    // Replace with your actual authentication method
+    //  token retrieval
     const response = await axios.get(process.env.BASE_URL + 'api/auth/session', {
             headers: {
                 'Content-Type': 'application/json',

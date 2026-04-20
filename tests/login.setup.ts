@@ -13,7 +13,7 @@ setup('Login with valid user credentials', async ({ page, loginPage, homePage })
         await homePage.categoriesCardIsVisible();
         await page.context().storageState({ path: STORAGE_STATE_USER });
     } catch (error) {
-        console.error('Authentication setup failed:', error);
+        process.stderr.write(`Authentication setup failed: ${String(error)}\n`);
         throw error;
     }
 });
